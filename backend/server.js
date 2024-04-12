@@ -1,6 +1,7 @@
 require('dotenv').config()
 
 const express =  require('express')
+const mongoose =  require('mongoose')
 const workoutRoutes = require('./routes/workouts')
 
 
@@ -8,7 +9,6 @@ const workoutRoutes = require('./routes/workouts')
 const app = express()
 
 // middleware
-
 app.use(express.json())//to access body in request
 
 app.use((req,res,next)=>{
@@ -19,7 +19,13 @@ app.use((req,res,next)=>{
 // routes
 app.use('/api/workouts',workoutRoutes)
 
-// listen for requests 
-app.listen(process.env.PORT,()=>{
-    console.log('listening on port 400!')
+// connect to db
+mongoose.connect(process.env.MONG_URI).then(()=>{
+    app.listen(process.env.PORT,()=>{
+        console.log('Connected to mongodb')
+    })
+}).catch((error)=>{
+    console.log(error)
 })
+
+// listen for requests 
