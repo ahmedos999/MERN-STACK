@@ -14,7 +14,7 @@ app.use(express.json())//to access body in request
 app.use((req,res,next)=>{
     console.log(req.path,req.method)
     next()
-})
+})//for logging in log file
 
 // routes
 app.use('/api/workouts',workoutRoutes)
