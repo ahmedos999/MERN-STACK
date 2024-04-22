@@ -1,6 +1,7 @@
 import { useEffect,useState } from "react"
 import React from 'react'
 import WorkoutDetails from "../components/WorkoutDetails"
+import WorkoutForms from "../components/WorkoutForms"
 
 
 
@@ -26,6 +27,7 @@ useEffect(()=>{
                 <WorkoutDetails key={workout._id} workout={workout}></WorkoutDetails>
             ))}
         </div>
+        <WorkoutForms></WorkoutForms>
     </div>
   )
 }
