@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+import { useWorkoutsContext } from '../hooks/useWorkoutsContext'
 
 export default function WorkoutForms() {
+    const {dispatch}= useWorkoutsContext()
     const [title,setTitle] = useState('')
     const [load,setLoad] = useState('')
     const [reps,setReps] = useState('')
@@ -31,24 +33,23 @@ export default function WorkoutForms() {
             setLoad('')
             setReps('')
             setError(null)
-            console.log('new workout added'+ json)
+            console.log('new workout added', json)
+            dispatch({type:'CREATE_WORKOUT',payload:json})
         }
-
-        
     }
      
   return (
     <form className='create' onSubmit={handleSubmit}>
         <h3>Add a new workout</h3>
         <label>Excersize Title</label>
-        <input type="text" onChange={(e)=>setTitle(e.target.value)}/>
+        <input type="text" value={title} onChange={(e)=>setTitle(e.target.value)}/>
 
         <label>Load (Kg)</label>
-        <input  type='number' onChange={(e)=>setLoad(e.target.value)}/>
+        <input  type='number' value={load} onChange={(e)=>setLoad(e.target.value)}/>
 
 
         <label>Reps</label>
-        <input type="number" onChange={(e)=>setReps(e.target.value)}/>
+        <input type="number" value={reps} onChange={(e)=>setReps(e.target.value)}/>
 
         <button>Add workout</button>
         {error && <div className='error'>{error}</div>}

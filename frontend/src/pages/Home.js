@@ -2,12 +2,13 @@ import { useEffect,useState } from "react"
 import React from 'react'
 import WorkoutDetails from "../components/WorkoutDetails"
 import WorkoutForms from "../components/WorkoutForms"
+import { useWorkoutsContext } from "../hooks/useWorkoutsContext"
 
 
 
 export default function Home() {
 
-    const [workouts,setWorkouts] = useState()
+    const {workouts,dispatch}= useWorkoutsContext()
     
 useEffect(()=>{
     const fetchWorkout = async ()=>{
@@ -15,7 +16,7 @@ useEffect(()=>{
        const json = await response.json()
 
        if(response.ok){
-           setWorkouts(json)
+           dispatch({type:'SET_WORKOUTS',payload:json})
        }
     }
     fetchWorkout()
