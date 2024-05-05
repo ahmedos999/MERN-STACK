@@ -1,4 +1,4 @@
-import { useEffect,useState } from "react"
+import { useEffect } from "react"
 import React from 'react'
 import WorkoutDetails from "../components/WorkoutDetails"
 import WorkoutForms from "../components/WorkoutForms"
@@ -20,7 +20,7 @@ useEffect(()=>{
        }
     }
     fetchWorkout()
-},[])
+},[dispatch])
   return (
     <div className='home'>
         <div className="workouts">
